@@ -1,15 +1,12 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 
+import auth from './auth';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    msg: 'hello',
-  },
-  getters: {
-    getMsg(state) {
-      return state.msg;
-    },
+  modules: {
+    auth,
   },
 });

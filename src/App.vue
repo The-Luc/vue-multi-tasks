@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import firebase from './utilities/firebase';
+import { mapMutations } from 'vuex';
+
 import NavBar from './components/NavBar';
 
 export default {
@@ -17,6 +20,20 @@ export default {
   components: {
     NavBar,
   },
+  mounted() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        const payload = {
+          id: user.uid,
+          email: user.email,
+        };
+        this.saveUser(payload);
+      } else {
+        console.log('You have not logged in');
+      }
+    });
+  },
+  methods: mapMutations('auth', ['saveUser']),
 };
 </script>
 
